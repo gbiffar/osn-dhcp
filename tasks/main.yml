@@ -1,0 +1,50 @@
+---
+- name: dhcp install
+  yum:
+    name: dhcp
+    state: present
+
+- name: create dhcp conf.d
+  file:
+    path: "{{ dhcp_include_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+
+- name: set dhcpd.conf
+  template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+    mode: 0640
+    owner: root
+    group: root
+    backup: yes
+  notify: restart dhcp
+
+- name: set mgt.osn.conf
+  template:
+    src: mgt.osn.conf.j2
+    dest: "{{ dhcp_include_dir }}/mgt.osn.conf"
+    mode: 0640
+    owner: root
+    group: root
+    backup: yes
+  notify: restart dhcp
+
+- name: set ext.osn.conf
+  template:
+    src: ext.osn.conf.j2
+    dest: "{{ dhcp_include_dir }}/ext.osn.conf"
+    mode: 0640
+    owner: root
+    group: root
+    backup: yes
+  notify: restart dhcp
+
+- name: enable dhcp service
+  service:
+    name: dhcpd.service
+    state: started
+    enabled: yes
+

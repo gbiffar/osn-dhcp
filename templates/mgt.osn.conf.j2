@@ -1,0 +1,34 @@
+#
+# /etc/dhcp/conf.d/mgt.osn.conf
+#
+# DHCP for OSN cluster network (vlan3; 172.16.3.0/24)
+
+deny unknown-clients;
+
+subnet {{ mgt_subnet }} netmask {{ mgt_netmask }} {
+
+  option subnet-mask            {{ mgt_netmask }};
+  option broadcast-address      {{ mgt_broadcast }};
+  option domain-name            "{{ mgt_domain }}";
+  option domain-name-servers    {{ mgt_domain_servers }};
+  option domain-search          "{{ mgt_domain }}";
+  option ntp-servers            {{ mgt_ntp_servers }};
+  option routers                {{ mgt_router }};
+
+  max-lease-time                {{ dhcp_lease }}; # 3 days
+  default-lease-time            {{ dhcp_lease }};
+  min-lease-time                {{ dhcp_lease }};
+
+  next-server                   {{ mgt_tftp }};
+  filename                      "{{ dhcp_filename }}";
+
+  # known clients - 
+
+  group { # OSN Cluster [begin]
+    {% for host, mac in mgt_group.iteritems() %}
+      host {{ host }} { hardware ethernet {{ mac }}; fixed-address {{ host }};  }
+    {% endfor %}
+
+
+  } # group OSN Cluster [end]
+}

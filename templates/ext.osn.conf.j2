@@ -1,0 +1,33 @@
+#
+# /etc/dhcp/conf.d/ext.osn.conf
+#
+# DHCP for OSN cluster network (vlan2; 172.16.2.0/24)
+
+deny unknown-clients;
+
+subnet {{ ext_subnet }} netmask {{ ext_netmask }} {
+
+  option subnet-mask            {{ ext_netmask }};
+  option broadcast-address      {{ ext_broadcast }};
+  option domain-name            "{{ ext_domain }}";
+  option domain-name-servers    {{ ext_domain_servers }};
+  option domain-search          "{{ ext_domain }}";
+  option ntp-servers            {{ ext_ntp_servers }};
+  option routers                {{ ext_router }};
+
+  max-lease-time                {{ dhcp_lease }}; # 3 days
+  default-lease-time            {{ dhcp_lease }};
+  min-lease-time                {{ dhcp_lease }};
+
+  next-server                   {{ ext_tftp}};
+  filename                      "{{ dhcp_filename }}";
+
+  # known clients - 
+
+  group { # OSN Cluster [begin]
+    {% for host, mac in ext_group.iteritems() %}
+      host {{ host }} { hardware ethernet {{ mac }}; fixed-address {{ host }};  }
+    {% endfor %}
+
+  } # group OSN Cluster [end]
+}

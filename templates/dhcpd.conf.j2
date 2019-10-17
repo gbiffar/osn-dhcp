@@ -1,0 +1,11 @@
+#
+# /etc/dhcp/dhcpd.conf
+#
+
+authoritative;
+ddns-update-style none;
+deny unknown-clients;
+
+# configuration by client subnet
+include "{{ dhcp_include_dir }}/mgt.osn.conf";
+include "{{ dhcp_include_dir }}/ext.osn.conf";

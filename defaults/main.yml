@@ -1,0 +1,3 @@
+---
+# osn-dhcp default vars
+dhcp_include_dir: /etc/dhcp/conf.d 

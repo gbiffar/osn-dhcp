@@ -1,0 +1,50 @@
+############
+# osn-dhcp #
+############
+
+dhcp_include_dir: /etc/dhcp/conf.d
+dhcp_lease: '259200'
+dhcp_filename: 'pxelinux.0'
+
+mgt_subnet: '172.16.3.0'
+mgt_netmask: '255.255.255.0'
+mgt_broadcast: '172.16.3.255'
+mgt_domain: 'mgt.osn'
+mgt_domain_servers: '172.16.3.11, 172.16.3.12, 172.16.3.13'
+mgt_ntp_servers: 'sdsc-ntp01-mgt.mgt.osn, sdsc-ntp02-mgt.mgt.osn, sdsc-ntp03-mgt.mgt.osn'
+mgt_router: '172.16.3.254'
+mgt_tftp: '172.16.3.12'
+mgt_group:
+  sdsc-dat01-mgt: "AC:1F:6B:74:C9:38" 
+  sdsc-dat02-mgt: "AC:1F:6B:72:F2:4C"
+  sdsc-dat03-mgt: "AC:1F:6B:74:C9:1D"
+  sdsc-dat04-mgt: "AC:1F:6B:74:C9:1C"
+  sdsc-dat05-mgt: "AC:1F:6B:71:99:C5"
+  sdsc-mon01-mgt: "AC:1F:6B:B8:3C:33"
+  sdsc-mon02-mgt: "AC:1F:6B:B8:3A:AE"
+  sdsc-mon03-mgt: "AC:1F:6B:B8:3A:E5"
+  sdsc-svc01-mgt: "AC:1F:6B:BB:32:B0"
+  sdsc-svc02-mgt: "AC:1F:6B:BB:2F:A6"
+  sdsc-svc03-mgt: "AC:1F:6B:BB:30:14"
+  sdsc-mlx01-mgt: "98:03:9B:AE:4D:40" 
+  sdsc-kvm01-mgt: "AC:1F:6B:BB:00:01" #place holder - go figure out what these should be
+  sdsc-pdu01-mgt: "AC:1F:6B:BB:00:02" #place holder - go figure out what these should be
+  sdsc-pdu02-mgt: "AC:1F:6B:BB:00:03" #place holder - go figure out what these should be
+
+ext_subnet: '172.16.2.0'
+ext_netmask: '255.255.255.0'
+ext_broadcast: '172.16.2.255'
+ext_domain: 'ext.osn'
+ext_domain_servers: '172.16.2.21, 172.16.2.22, 172.16.2.23'
+ext_ntp_servers: 'sdsc-ntp01-ext.ext.osn, sdsc-ntp02-ext.ext.osn, sdsc-ntp03-ext.ext.osn'
+ext_router: '172.16.2.254'
+ext_tftp: '172.16.2.22'
+ext_group:
+  sdsc-dat01-ext: "98:03:9B:8C:6A:56" #used p6p1
+  sdsc-dat02-ext: "98:03:9B:8C:65:D2"
+  sdsc-dat03-ext: "98:03:9B:8C:66:4E"
+  sdsc-dat04-ext: "98:03:9B:8C:66:52"
+  sdsc-dat05-ext: "24:8A:07:8A:3D:32"
+  sdsc-mon01-ext: "B8:59:9F:06:37:3C" #used p3p1
+  sdsc-mon02-ext: "B8:59:9F:06:36:50"
+  sdsc-mon03-ext: "B8:59:9F:06:36:C4"
